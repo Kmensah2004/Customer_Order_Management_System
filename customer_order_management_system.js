@@ -61,3 +61,17 @@ function calculateOrderTotal(order) {
 const order = orders[0]; // Fetch the James Gold's order
 console.log(`Total for ${order.customerName}'s order: $${calculateOrderTotal(order)}`);
 
+//Task 5
+function completeOrder(customerName){
+        const order = orders.find(ord => ord.customerName === customerName); // Find the customer's order by name
+        if (order) {
+            order.status = 'Completed'; // Change the order status to 'Completed'
+            console.log(`Order for ${customerName} has been completed.`);
+        } else {
+            console.log(`Error: No order for ${customerName}.`); // Error if no  order is found
+        }
+    }
+    completeOrder('Mark Reed');
+completeOrder('Kosi Mensah');
+    
+
