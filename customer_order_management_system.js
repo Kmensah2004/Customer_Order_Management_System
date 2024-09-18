@@ -46,3 +46,18 @@ function placeOrder(customerName, orderedItems) {
 placeOrder('James Gold', [{ name: 'coffee', quantity: 2 }, { name: 'Bagel', quantity: 3 }]);
 placeOrder('Kosi Mensah', [{ name: 'LemonBread', quantity: 16 }]); // Error due to insufficient stock
 
+//Task 4
+function calculateOrderTotal(order) {
+    let total = 0;
+    order.items.forEach(item => {
+        const product = inventory.find(prod => prod.name === item.name); 
+        {
+            total += product.price * item.quantity; // Add price of product multiplied by its quantity to the total
+        }
+});
+    return total; // Return the total price for the order
+}
+
+const order = orders[0]; // Fetch the James Gold's order
+console.log(`Total for ${order.customerName}'s order: $${calculateOrderTotal(order)}`);
+
