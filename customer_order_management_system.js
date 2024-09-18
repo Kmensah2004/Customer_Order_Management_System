@@ -3,9 +3,46 @@ const inventory = [{name: "coffee", price: 6.99, quantity:5},
     {name: "Bagel", price: 5.99, quantity:11},
     {name: "LemonBread", price: 1.50, quantity:15},
     {name: "Lemonade", price: 3.99, quantity:8}];
+    console.log(inventory);
 
     // Task 2
-    let orders = [];
-    const orderItems = [{Cname: "Jimmy",name:"coffee",price: 6.99, ordquantity:2,Status:Completed, 
-    Cname:"Carl",name:"LemonBread",price: 1.50, ordquantity:1, Status:Pending}];
-    
+    const orders = [];
+console.log("Orders array initialize:");
+console.log(orders);
+
+//Task 3
+function placeOrder(customerName, orderedItems) {
+    // Step 1: Check if there is enough stock for each ordered item
+    orderedItems.forEach(item => {
+    const product = inventory.find(prod => prod.name === item.name); // Find the product in the inventory
+        
+        if (!product ) {
+            console.log(`Error: ${item.name} is not available in the current inventory.`);
+            return; 
+        }
+
+       else if (product.quantity < item.quantity) {
+            console.log(`Error: Insufficient stock for ${item.name}. Available: ${product.quantity}`);
+            return; // Exit the function if stock is insufficient
+        }
+        else
+        {
+            product.quantity -= item.quantity;
+            return product.quantity;
+        }
+    })
+
+    // Step 3: Add the order to the orders array with 'Pending' status
+    orders.push({
+        customerName: customerName,
+        items: orderedItems,
+        status: 'Pending' 
+    });
+
+    console.log(`Order placed successfully for ${customerName}.`)
+}
+
+// Example usage of placeOrder function:
+placeOrder('James Gold', [{ name: 'coffee', quantity: 2 }, { name: 'Bagel', quantity: 3 }]);
+placeOrder('Kosi Mensah', [{ name: 'LemonBread', quantity: 16 }]); // Error due to insufficient stock
+
