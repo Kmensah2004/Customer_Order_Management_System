@@ -1,4 +1,4 @@
-//Task 1 array with 4 diffrent products from coffe shop
+//Task 1 array with 4 diffrent products from coffee shop
 const inventory = [{name: "coffee", price: 6.99, quantity:5},
     {name: "Bagel", price: 5.99, quantity:11},
     {name: "LemonBread", price: 1.50, quantity:15},
@@ -6,33 +6,32 @@ const inventory = [{name: "coffee", price: 6.99, quantity:5},
     console.log(inventory);
 
     // Task 2
-    const orders = [];
+    const orders = []; // intialized an empty array to push orders into
 console.log("Orders array initialize:");
 console.log(orders);
 
 //Task 3
 function placeOrder(customerName, orderedItems) {
-    // Step 1: Check if there is enough stock for each ordered item
+    // Check if there is enough stock for each ordered item
     orderedItems.forEach(item => {
-    const product = inventory.find(prod => prod.name === item.name); // Find the product in the inventory
-        
+    const product = inventory.find(prod => prod.name === item.name); // Find the product in the inventory   
         if (!product ) {
-            console.log(`Error: ${item.name} is not available in the current inventory.`);
+            console.log(`Error: ${item.name} is not available in the current inventory.`); // if no ordered product is found in inventory it displays error message
             return; 
         }
 
        else if (product.quantity < item.quantity) {
             console.log(`Error: Insufficient stock for ${item.name}. Available: ${product.quantity}`);
-            return; // Exit the function if stock is insufficient
+            return; //  if stock ordered is not suitable for stock in inventory it prints error message
         }
         else
         {
-            product.quantity -= item.quantity;
+            product.quantity -= item.quantity; // if product is found it takes the quantity ordered minus the product in stock
             return product.quantity;
         }
     })
 
-    // Step 3: Add the order to the orders array with 'Pending' status
+    // Add the order to the orders array with 'Pending' status
     orders.push({
         customerName: customerName,
         items: orderedItems,
@@ -42,7 +41,7 @@ function placeOrder(customerName, orderedItems) {
     console.log(`Order placed successfully for ${customerName}.`)
 }
 
-// Example usage of placeOrder function:
+// utilized of placeOrder function:
 placeOrder('James Gold', [{ name: 'coffee', quantity: 2 }, { name: 'Bagel', quantity: 3 }]);
 placeOrder('Kosi Mensah', [{ name: 'LemonBread', quantity: 16 }]); // Error due to insufficient stock
 
@@ -63,7 +62,7 @@ console.log(`Total for ${order.customerName}'s order: $${calculateOrderTotal(ord
 
 //Task 5
 function completeOrder(customerName){
-        const order = orders.find(ord => ord.customerName === customerName); // Find the customer's order by name
+    const order = orders.find(ord => ord.customerName === customerName); // Find the customer's order by name
         if (order) {
             order.status = 'Completed'; // Change the order status to 'Completed'
             console.log(`Order for ${customerName} has been completed.`);
@@ -73,5 +72,17 @@ function completeOrder(customerName){
     }
     completeOrder('Mark Reed');
 completeOrder('Kosi Mensah');
+
+//Task 6
+function checkingPendingOrders()
+{
+       orders.forEach(order => {       
+        if (order.status === 'Pending') {
+console.log(`Pending Order for ${order.customerName}:`);
+console.log(`Items: ${order.orderedItems}`);
+            }
+        });
+    }
+    checkingPendingOrders(); 
     
 
